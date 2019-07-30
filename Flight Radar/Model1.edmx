@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="radarModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'radar.dbo.Directionslist' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Directionslist">
+          <Key>
+            <PropertyRef Name="Direction" />
+            <PropertyRef Name="Pointslocs_Id" />
+          </Key>
+          <Property Name="Direction" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Pointslocs_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'radar.dbo.Pointslocs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Pointslocs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PointX" Type="float" />
+          <Property Name="PointY" Type="float" />
+        </EntityType>
+        <EntityContainer Name="radarModelStoreContainer">
+          <EntitySet Name="Directionslist" EntityType="Self.Directionslist" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Directionslist].[Direction] AS [Direction], 
+    [Directionslist].[Pointslocs_Id] AS [Pointslocs_Id]
+    FROM [dbo].[Directionslist] AS [Directionslist]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Pointslocs" EntityType="Self.Pointslocs" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Pointslocs].[Id] AS [Id], 
+    [Pointslocs].[PointX] AS [PointX], 
+    [Pointslocs].[PointY] AS [PointY]
+    FROM [dbo].[Pointslocs] AS [Pointslocs]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="radarModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Directionslist">
+          <Key>
+            <PropertyRef Name="Direction" />
+            <PropertyRef Name="Pointslocs_Id" />
+          </Key>
+          <Property Name="Direction" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Pointslocs_Id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pointsloc">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PointX" Type="Double" />
+          <Property Name="PointY" Type="Double" />
+        </EntityType>
+        <EntityContainer Name="radarEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Directionslists" EntityType="Self.Directionslist" />
+          <EntitySet Name="Pointslocs" EntityType="Self.Pointsloc" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="radarModelStoreContainer" CdmEntityContainer="radarEntities">
+          <EntitySetMapping Name="Directionslists">
+            <EntityTypeMapping TypeName="radarModel.Directionslist">
+              <MappingFragment StoreEntitySet="Directionslist">
+                <ScalarProperty Name="Direction" ColumnName="Direction" />
+                <ScalarProperty Name="Pointslocs_Id" ColumnName="Pointslocs_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pointslocs">
+            <EntityTypeMapping TypeName="radarModel.Pointsloc">
+              <MappingFragment StoreEntitySet="Pointslocs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PointX" ColumnName="PointX" />
+                <ScalarProperty Name="PointY" ColumnName="PointY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
